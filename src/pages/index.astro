@@ -1,0 +1,90 @@
+---
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import About from '../components/About.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <Header />
+  <main>
+    <Hero />
+    <Services />
+    <About />
+    <Testimonials />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>
+
+<script>
+  // Smooth scroll for navigation links
+  document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('a[href^="#"]');
+    
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href') || '';
+        const targetElement = document.querySelector<HTMLElement>(targetId);
+        
+        if (targetElement) {
+          const headerOffset = 80;
+          const elementPosition = targetElement.offsetTop;
+          const offsetPosition = elementPosition - headerOffset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Header background on scroll
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 100) {
+        header?.classList.add('bg-white/95');
+        header?.classList.remove('bg-white/95');
+      }
+    });
+    
+    // Form submission
+    const form = document.querySelector('form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+        
+        // Create WhatsApp message
+        const message = `¡Hola! Me interesa agendar una consulta de terapia respiratoria.
+
+*Mis datos:*
+• Nombre: ${data.nombre}
+• Teléfono: ${data.telefono}
+• Email: ${data.email}
+• Servicio: ${data.servicio}
+• Mensaje: ${data.mensaje || 'No especificado'}
+
+¿Podrías ayudarme con la información sobre disponibilidad?`;
+        
+        const whatsappUrl = `https://wa.me/573001234567?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        
+        // Reset form
+        form.reset();
+        
+        // Show success message
+        alert('¡Gracias! Te redirigimos a WhatsApp para completar tu solicitud.');
+      });
+    }
+  });
+</script>
