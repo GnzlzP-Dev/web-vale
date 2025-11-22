@@ -1,0 +1,17 @@
+{
+    "name": "Dominique Londoño - Terapia Respiratoria",
+    "short_name": "Terapia Respiratoria",
+    "description": "Terapia respiratoria profesional a domicilio en Medellín. Especialista en rehabilitación pulmonar, fisioterapia respiratoria y cuidado integral del sistema respiratorio.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#10b981",
+    "icons": [
+        {
+            "src": "/images/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
